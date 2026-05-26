@@ -1,0 +1,12 @@
+pyodbc>=5.0.0
+pandas>=2.0.0
+sqlalchemy>=2.0.0
+scikit-learn>=1.3.0
+joblib>=1.3.0
+numpy>=1.26.0
+ddgs>=9.0.0
+reportlab>=4.0.0
+flask>=3.0.0
+pypdf>=4.0.0
+pillow>=10.0.0
+pytesseract>=0.3.10
