@@ -1,0 +1,285 @@
+:root {
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --primary: #1a365d;
+  --accent: #2b6cb0;
+  --muted: #718096;
+  --border: #e2e8f0;
+  --success: #276749;
+  --error: #c53030;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+.hero {
+  background: linear-gradient(135deg, #1a365d, #2c5282);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+}
+
+.hero p {
+  margin: 0;
+  opacity: 0.9;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.side-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .layout,
+  .side-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border);
+}
+
+.panel h2 {
+  margin-top: 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.form label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form input[type="text"],
+.form input[type="file"] {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background: #2c5282;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: var(--primary);
+  text-align: center;
+  width: 100%;
+}
+
+.report-panel {
+  min-height: 320px;
+}
+
+.report-card section {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.report-card h3 {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+
+.report-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.report-date {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0.25rem 0 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  background: #ebf8ff;
+  color: #2c5282;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
+
+.chip-skill {
+  background: #faf089;
+  color: #744210;
+  margin-right: 0.25rem;
+}
+
+.highlight-box {
+  background: #fffaf0;
+  border: 1px solid #fbd38d;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.highlight-box h4 {
+  margin: 0 0 0.35rem;
+  color: #c05621;
+}
+
+.gap-details {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.gap-surplus {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.gap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.gap-grid h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  color: var(--primary);
+}
+
+.gap-grid ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.82rem;
+}
+
+.alert {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.alert-error {
+  background: #fff5f5;
+  color: var(--error);
+  border: 1px solid #feb2b2;
+}
+
+.category-block {
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+}
+
+.category-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-list li {
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.links-list a {
+  color: var(--accent);
+}
+
+.provider {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.mt {
+  margin-top: 1.5rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.report-footer {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
