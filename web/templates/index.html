@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Insight Agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="hero">
+    <h1>Career Insight Agent</h1>
+    <p>Analyze your resume, compare it to the market, and get a personalized mini-report.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2> Upload your resume </h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <p class="alert alert-{{ category }}">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data" class="form">
+        <label for="cv_file">CV File (TXT, PDF ou image)</label>
+        <input
+          type="file"
+          id="cv_file"
+          name="cv_file"
+          accept=".txt,.pdf,.png,.jpg,.jpeg,.webp,.bmp,.tiff"
+          required
+        />
+        <p class="muted small">Native PDF text, TXT, or image (PNG/JPG) with OCR if T esseract est installé.</p>
+
+        <label for="target_job">Target Job</label>
+        <input
+          type="text"
+          id="target_job"
+          name="target_job"
+          list="jobs-list"
+          placeholder="Ex: Data Analyst, HR Manager, etc..."
+          value="{{ target_job }}"
+          required
+        />
+        <datalist id="jobs-list">
+          {% for job in job_suggestions %}
+            <option value="{{ job }}"></option>
+          {% endfor %}
+        </datalist>
+
+        <button type="submit" class="btn-primary">Analyze my resume</button>
+      </form>
+
+      {% if download_token %}
+        <a class="btn-secondary" href="{{ url_for('download', token=download_token) }}">
+          Download the PDF report
+        </a>
+      {% endif %}
+    </section>
+
+    <section class="panel report-panel">
+      <h2> Mini-report</h2>
+      {% if report_html %}
+        {{ report_html | safe }}
+      {% else %}
+        <p class="muted">The report will be displayed here after the analysis (profile, trends, gaps, recommendations).</p>
+      {% endif %}
+    </section>
+
+    <aside class="panel side-panel">
+      <h2>Trends by category (DuckDuckGo)</h2>
+      <p class="muted small">Compétences extraites en temps réel depuis le web.</p>
+      {% for category, skills in category_trends.items() %}
+        <details class="category-block">
+          <summary>{{ category }}</summary>
+          <div class="chips">
+            {% for skill in skills %}
+              <span class="chip">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </details>
+      {% endfor %}
+
+      <h2 class="mt">Free training</h2>
+      {% if training_personalized %}
+        <p class="muted small">Recommended based on skills missing from your CV and your target role.</p>
+      {% else %}
+        <p class="muted small">Run an analysis to see training aligned with your gaps.</p>
+      {% endif %}
+      <ul class="links-list">
+        {% for link in training_links %}
+          <li>
+            {% if link.related_skill %}
+              <span class="chip chip-skill">{{ link.related_skill }}</span>
+            {% endif %}
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+              <strong>{{ link.title }}</strong>
+            </a>
+            <span class="provider">{{ link.provider }}</span>
+            <p class="small">{{ link.description }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Career Insight Agent — SSMS (fact_job_posts, dim_skill, bridge_job_skill) + DuckDuckGo Search Engine + Tesseract OCR </p>
+  </footer>
+</body>
+</html>
